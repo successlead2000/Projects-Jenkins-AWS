@@ -11,6 +11,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <sonar.host.url>http://3.110.130.11:9000/</sonar.host.url>
+        <sonar.login>squ_0f422d38d5319297a9c319e40a1e42b8e8a6637d</sonar.login>
     </properties>
 
     <dependencies>
