@@ -1,32 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>maven-web-application</artifactId>
-    <version>2.0.0</version>
-    <packaging>war</packaging> <!-- Specifies a web application archive -->
+    <artifactId>java-web-application</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
-        <!-- Java version -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.host.url>http://13.233.200.187:9000/</sonar.host.url>
-        <sonar.login>squ_289d16491dae73082193c7229fa9cf79172389b3</sonar.login>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
-    <repositories>
-            <repository>
-                    <id>nexus</id>
-                    <name>amazon-group-repo</name>
-                    <url>http://3.6.90.106:8082/sky/repository/amazon-group-repo/</url>
-            </repository>
-    </repositories>
-
     <dependencies>
-        <!-- Servlet API -->
+        <!-- Servlet API dependency -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -34,7 +22,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JUnit 5 for testing -->
+        <!-- JUnit for testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -42,78 +30,49 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- THIS DEPENDENCY ADDING FROM NEXUS REMOTE REPOSITORY -->
+        <!-- Logging framework dependencies -->
         <dependency>
-                  <groupId>cloud.aws</groupId>
-                  <artifactId>maven-standalone-app-2024</artifactId>
-                  <version>5.0.0</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.8</version>
         </dependency>
 
+        <!-- Optional: Add other dependencies here -->
     </dependencies>
-
-    <distributionManagement>
-
-            <repository>
-                    <id>nexus</id>
-                    <name>release nexus repository</name>
-                    <url>http://3.6.90.106:8082/sky/repository/amazon-release/</url>
-            </repository>
-
-            <snapshotRepository>
-                    <id>nexus</id>
-                    <name>snapshot nexus repository</name>
-                    <url>http://3.6.90.106:8082/sky/repository/amazon-snapshot/</url>
-            </snapshotRepository>
-
-     </distributionManagement>
 
     <build>
         <plugins>
-            <!-- Compiler plugin -->
+            <!-- Compiler plugin for Java 17 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <release>17</release>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
 
-            <!-- War plugin -->
+            <!-- WAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
                 <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml> <!-- Optional if you don't have web.xml -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
 
-            <!-- Plugin for running the web application -->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/</path>
-                    <port>8080</port>
-                </configuration>
-            </plugin>
-
-            <!-- Plugin to include source code -->
+            <!-- Surefire plugin for running tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
             </plugin>
         </plugins>
     </build>
