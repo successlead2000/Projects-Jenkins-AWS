@@ -47,6 +47,19 @@
         <!-- Optional: Add other dependencies here -->
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Amazon Release Nexus Repository</name>
+            <url>http://15.206.74.238:8082/sky/repository/amazon-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Amazon Snapshot Nexus Repository</name>
+            <url>http://15.206.74.238:8082/sky/repository/amazon-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <!-- Compiler plugin for Java 17 -->
